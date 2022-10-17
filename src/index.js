@@ -3,10 +3,9 @@ import React, { useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-const buttonsToRender = ['1', '2', '3', '\u00F7', '4', '5', '6', 'x', '7', '8', '9', '+', '0', '=', '-'];
-const operatorValues = ['/', '*', '+', '-'];
-const buttonsValues = ['1', '2', '3', operatorValues[0], '4', '5', '6', operatorValues[1], '7', '8', '9', operatorValues[2], '0', '=', operatorValues[3]];
-const doubleWidthButton = '=';
+const buttonsToRender = ['Clear', '1', '2', '3', '\u00F7', '4', '5', '6', 'x', '7', '8', '9', '+', '0', '=', '-'];
+const buttonsValues = ['c', '1', '2', '3', '/', '4', '5', '6', '*', '7', '8', '9', '+', '0', '=', '-'];
+const doubleWidthButton = ['=', 'c'];
 
 var calcInputs = '';
 
@@ -17,7 +16,7 @@ const Buttons = props => (
         <button
           className="number-button button"
           key={buttonsValues[index]}
-          style={ buttonsValues[index] === doubleWidthButton ? { width:'400px' } : {}}
+          style={ doubleWidthButton.includes(buttonsValues[index]) ? { width:'400px' } : {}}
           onClick={()=>props.handleInput(buttonsToRender[index], buttonsValues[index])}
         >
           {buttonsToRender[index]}
@@ -41,16 +40,26 @@ function Calculator() {
   });
   const [calcDisplay, setCalcDisplay] = useState('0');
 
-  function handleInput(inpDisplay, inpValue) {
-    if(inpDisplay === '=') {
+  function resetCalculator() {
+    setCalcDisplay('0');
+    calcInputs = '';
+    return;
+  }
+
+  function handleInput(inputToDisplay, inpValue) {
+    if(inpValue === 'c') {
+      return resetCalculator();
+    }
+
+    if(inputToDisplay === '=') {
       return setCalcDisplay(calcInputs = calculateAnswer());
     }
-    calcInputs += inpValue;
 
+    calcInputs += inpValue;
     if(calcDisplay === '0') {
-      return setCalcDisplay(inpDisplay);
+      return setCalcDisplay(inputToDisplay);
     }
-    setCalcDisplay(calcDisplay + inpDisplay);
+    setCalcDisplay(calcDisplay + inputToDisplay);
   }
 
   function calculateAnswer() {
