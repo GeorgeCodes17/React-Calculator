@@ -8,7 +8,7 @@ const operatorValues = ['/', '*', '+', '-'];
 const buttonsValues = ['1', '2', '3', operatorValues[0], '4', '5', '6', operatorValues[1], '7', '8', '9', operatorValues[2], '0', '=', operatorValues[3]];
 const doubleWidthButton = '=';
 
-var allInputs = [];
+var calcInputs = '';
 
 const Buttons = props => (
   <div>
@@ -30,7 +30,7 @@ const Buttons = props => (
 
 const Display = props => (
   <div className="display-container">
-    <p className="display">{props.displayText}</p>
+    <p id="calculator-display" className="display">{props.displayText}</p>
   </div>
 )
 
@@ -41,55 +41,27 @@ function Calculator() {
   });
   const [calcDisplay, setCalcDisplay] = useState('0');
 
-  function handleInput(text, value) {
-    if(value === '=') {
-      return setCalcDisplay(compute(value));
+  function handleInput(inpDisplay, inpValue) {
+    if(inpDisplay === '=') {
+      return setCalcDisplay(calcInputs = calculateAnswer());
     }
-    allInputs.push(value);
-    updateDisplay(text, value);
-  }
-  function compute() {
-    console.log('Computer ', allInputs)
-    var numsToCalc = {
-      beforeOperator: null,
-      operator: '',
-      afterOperator: null
-    };
+    calcInputs += inpValue;
 
-    let input;
-    var result = 0;
-    for (let i = 0; i < allInputs.length-1; i++) {
-      input = allInputs[i];
-
-      if(!operatorValues.includes(input)) {
-        numsToCalc.beforeOperator = (numsToCalc.beforeOperator === null) ? input : numsToCalc.beforeOperator + input;
-      }
-
-      if(operatorValues.includes(input)) {
-        numsToCalc.operator = input;
-        for (let iter = i+1; iter < allInputs.length; iter++) {
-          numsToCalc.afterOperator = (numsToCalc.afterOperator === null) ? allInputs[iter] : numsToCalc.afterOperator + allInputs[iter];
-        }
-        result = eval(numsToCalc.beforeOperator + numsToCalc.operator + numsToCalc.afterOperator);
-        console.log(result);
-        return result;
-      }
-    }
-  }
-  
-  function updateDisplay(text, value) {
     if(calcDisplay === '0') {
-      return setCalcDisplay(text);
+      return setCalcDisplay(inpDisplay);
     }
-    
-    setCalcDisplay(calcDisplay + value);
+    setCalcDisplay(calcDisplay + inpDisplay);
+  }
+
+  function calculateAnswer() {
+    return eval(calcInputs);
   }
 
   return (
     <div className="container">
       <Display displayText={calcDisplay}/>
       <div className="most-numbers-container">
-        <Buttons numOfButtons={buttonsToRender} handleInput={handleInput} handleCalculation />
+        <Buttons numOfButtons={buttonsToRender} handleInput={handleInput} />
       </div>
     </div>
   );
