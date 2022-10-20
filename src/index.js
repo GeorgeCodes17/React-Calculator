@@ -3,9 +3,10 @@ import React, { useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
-const buttonsToRender = ['Clear', '1', '2', '3', '\u00F7', '4', '5', '6', 'x', '7', '8', '9', '+', '0', '=', '-'];
-const buttonsValues = ['c', '1', '2', '3', '/', '4', '5', '6', '*', '7', '8', '9', '+', '0', '=', '-'];
-const doubleWidthButton = ['=', 'c'];
+const buttonsToRender = ['Clear', '-', 'Back', '1', '2', '3', '\u00F7', '4', '5', '6', 'x', '7', '8', '9', '+', '0', '.', '='];
+const buttonsValues = ['c', '-', 'b', '1', '2', '3', '/', '4', '5', '6', '*', '7', '8', '9', '+', '0', '.' , '='];
+
+const doubleWidthButton = ['=', 'b'];
 
 var calcInputs = '';
 
@@ -45,25 +46,50 @@ function Calculator() {
     calcInputs = '';
     return;
   }
-
-  function handleInput(inputToDisplay, inpValue) {
-    if(inpValue === 'c') {
-      return resetCalculator();
-    }
-
-    if(inputToDisplay === '=') {
-      return setCalcDisplay(calcInputs = calculateAnswer());
-    }
-
-    calcInputs += inpValue;
-    if(calcDisplay === '0') {
-      return setCalcDisplay(inputToDisplay);
-    }
-    setCalcDisplay(calcDisplay + inputToDisplay);
+  
+  function decrementCalcInput() {
+    setCalcDisplay(calcDisplay.slice(0, -1));
+    calcInputs = calcInputs.slice(0, -1);
   }
 
   function calculateAnswer() {
-    return eval(calcInputs);
+    try {
+      return eval(calcInputs).toString();
+    } catch (e) {
+      return 'e';
+    }
+  }
+
+  function addToCalcDisplay(newChar, inputToDisplay, inpValue) {
+    setCalcDisplay(calcDisplay + inputToDisplay);
+    calcInputs += inpValue;
+  }
+
+  function handleInput(inputToDisplay, inpValue) {
+    if(calcDisplay === '0') {
+      setCalcDisplay(inputToDisplay);
+      return calcInputs += inpValue;
+    }
+    switch(inpValue) {
+      case '.':
+        var lastNum = calcInputs.split(/[*/+-]+/).pop();
+        if(lastNum.split('.').length-1 === 1){
+          return;
+        }
+        return addToCalcDisplay(inputToDisplay, inputToDisplay, inpValue);
+      case 'b':
+        return decrementCalcInput();
+      case 'c':
+        return resetCalculator();
+      case '=':
+        calcInputs = calculateAnswer();
+        if(calcInputs === 'e') {
+          resetCalculator();
+        }
+        return setCalcDisplay(calcInputs);
+      default:
+        return addToCalcDisplay(inputToDisplay, inputToDisplay, inpValue);
+    }
   }
 
   return (
