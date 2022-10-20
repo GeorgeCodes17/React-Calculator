@@ -44,7 +44,6 @@ function Calculator() {
   function resetCalculator() {
     setCalcDisplay('0');
     calcInputs = '';
-    return;
   }
   
   function decrementCalcInput() {
@@ -60,7 +59,7 @@ function Calculator() {
     }
   }
 
-  function addToCalcDisplay(newChar, inputToDisplay, inpValue) {
+  function addToCalcDisplay(inputToDisplay, inpValue) {
     setCalcDisplay(calcDisplay + inputToDisplay);
     calcInputs += inpValue;
   }
@@ -76,7 +75,7 @@ function Calculator() {
         if(lastNum.split('.').length-1 === 1){
           return;
         }
-        return addToCalcDisplay(inputToDisplay, inputToDisplay, inpValue);
+        return addToCalcDisplay(inputToDisplay, inpValue);
       case 'b':
         return decrementCalcInput();
       case 'c':
@@ -88,7 +87,7 @@ function Calculator() {
         }
         return setCalcDisplay(calcInputs);
       default:
-        return addToCalcDisplay(inputToDisplay, inputToDisplay, inpValue);
+        return addToCalcDisplay(inputToDisplay, inpValue);
     }
   }
 
