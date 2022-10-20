@@ -8,10 +8,9 @@ const buttonsValues = ['c', '-', 'b', '1', '2', '3', '/', '4', '5', '6', '*', '7
 
 const doubleWidthButton = ['=', 'b'];
 
-var calcInputs = '';
-
 const Buttons = props => (
-  <div>
+  <div className="most-numbers-container">
+    <div>
     {
       [...Array(buttonsToRender.length)].map((e, index) =>
         <button
@@ -24,7 +23,7 @@ const Buttons = props => (
         </button>
       )
     }
-
+    </div>
   </div>
 )
 
@@ -43,35 +42,40 @@ function Calculator() {
 
   function resetCalculator() {
     setCalcDisplay('0');
-    calcInputs = '';
   }
   
   function decrementCalcInput() {
     setCalcDisplay(calcDisplay.slice(0, -1));
-    calcInputs = calcInputs.slice(0, -1);
   }
 
   function calculateAnswer() {
     try {
-      return eval(calcInputs).toString();
+      return eval(getCalcValsFromDisplay()).toString();
     } catch (e) {
       return 'e';
     }
   }
 
-  function addToCalcDisplay(inputToDisplay, inpValue) {
-    setCalcDisplay(calcDisplay + inputToDisplay);
-    calcInputs += inpValue;
+  function addToCalcDisplay(inputToDisplay) {
+    calcDisplay !== '0' ? setCalcDisplay(calcDisplay + inputToDisplay) : setCalcDisplay(inputToDisplay);
+  }
+
+  function getCalcValsFromDisplay() {
+    var calcVals = '';
+    calcDisplay.split('').forEach(displayElem => {
+      var indexOfElem = buttonsToRender.indexOf(displayElem);
+      calcVals += buttonsValues[indexOfElem];
+    });
+    return calcVals;
   }
 
   function handleInput(inputToDisplay, inpValue) {
     if(calcDisplay === '0') {
       setCalcDisplay(inputToDisplay);
-      return calcInputs += inpValue;
     }
     switch(inpValue) {
       case '.':
-        var lastNum = calcInputs.split(/[*/+-]+/).pop();
+        var lastNum = calcDisplay.split(/[x÷+-]+/).pop();
         if(lastNum.split('.').length-1 === 1){
           return;
         }
@@ -81,22 +85,21 @@ function Calculator() {
       case 'c':
         return resetCalculator();
       case '=':
-        calcInputs = calculateAnswer();
-        if(calcInputs === 'e') {
-          resetCalculator();
+        var answer = calculateAnswer();
+        if(answer === 'e') {
+          return resetCalculator();
         }
-        return setCalcDisplay(calcInputs);
+        return setCalcDisplay(answer);
       default:
-        return addToCalcDisplay(inputToDisplay, inpValue);
+        return addToCalcDisplay(inputToDisplay);
     }
   }
 
   return (
     <div className="container">
       <Display displayText={calcDisplay}/>
-      <div className="most-numbers-container">
-        <Buttons numOfButtons={buttonsToRender} handleInput={handleInput} />
-      </div>
+      
+      <Buttons numOfButtons={buttonsToRender} handleInput={handleInput} />
     </div>
   );
 }
