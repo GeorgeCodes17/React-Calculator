@@ -45,7 +45,10 @@ function Calculator() {
   }
   
   function decrementCalcInput() {
-    setCalcDisplay(calcDisplay.slice(0, -1));
+    if(calcDisplay === '0' || calcDisplay.length === 1) {
+      return setCalcDisplay('0');
+    }
+    return setCalcDisplay(calcDisplay.slice(0, -1));
   }
 
   function calculateAnswer() {
@@ -85,9 +88,9 @@ function Calculator() {
           return;
         }
         return addToCalcDisplay(inputToDisplay);
-      case 'b':
+      case 'Back':
         return decrementCalcInput();
-      case 'c':
+      case 'Clear':
         return resetCalculator();
       case '=':
         var answer = calculateAnswer();
