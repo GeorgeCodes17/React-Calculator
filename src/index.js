@@ -17,7 +17,7 @@ const Buttons = props => (
           className="number-button button"
           key={buttonsValues[index]}
           style={ doubleWidthButton.includes(buttonsValues[index]) ? { width:'400px' } : {}}
-          onClick={()=>props.handleInput(buttonsToRender[index], buttonsValues[index])}
+          onClick={()=>props.handleInput(buttonsToRender[index])}
         >
           {buttonsToRender[index]}
         </button>
@@ -69,7 +69,7 @@ function Calculator() {
     return calcVals;
   }
 
-  function handleInput(inputToDisplay, inpValue) {
+  function handleInput(inputToDisplay) {
     if(calcDisplay === '0') {
       setCalcDisplay(inputToDisplay);
     }
