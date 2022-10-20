@@ -5,7 +5,7 @@ import './index.css';
 
 const buttonsToRender = ['Clear', '-', 'Back', '1', '2', '3', '\u00F7', '4', '5', '6', 'x', '7', '8', '9', '+', '0', '.', '='];
 const buttonsValues = ['c', '-', 'b', '1', '2', '3', '/', '4', '5', '6', '*', '7', '8', '9', '+', '0', '.' , '='];
-
+const operators = ['-', '\u00F7', 'x', '+'];
 const doubleWidthButton = ['=', 'b'];
 
 const Buttons = props => (
@@ -73,13 +73,18 @@ function Calculator() {
     if(calcDisplay === '0') {
       setCalcDisplay(inputToDisplay);
     }
-    switch(inpValue) {
+    switch(inputToDisplay) {
+      case 'x': case '÷': case '+': case '-':
+        if(operators.includes(calcDisplay.slice(-1))) {
+          return;
+        }
+        return addToCalcDisplay(inputToDisplay);
       case '.':
         var lastNum = calcDisplay.split(/[x÷+-]+/).pop();
         if(lastNum.split('.').length-1 === 1){
           return;
         }
-        return addToCalcDisplay(inputToDisplay, inpValue);
+        return addToCalcDisplay(inputToDisplay);
       case 'b':
         return decrementCalcInput();
       case 'c':
