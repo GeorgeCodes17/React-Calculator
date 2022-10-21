@@ -73,15 +73,13 @@ function Calculator() {
   }
 
   function handleInput(inputToDisplay) {
-    if(calcDisplay === '0') {
-      setCalcDisplay(inputToDisplay);
-    }
     switch(inputToDisplay) {
       case 'x': case '÷': case '+': case '-':
-        if(operators.includes(calcDisplay.slice(-1))) {
-          return;
+        var lastDisplayChar = calcDisplay.slice(-1);
+        if(!operators.includes(lastDisplayChar) && calcDisplay !== '0' || calcDisplay === '0' && inputToDisplay === '-') {
+          return addToCalcDisplay(inputToDisplay);
         }
-        return addToCalcDisplay(inputToDisplay);
+        return;
       case '.':
         var lastNum = calcDisplay.split(/[x÷+-]+/).pop();
         if(lastNum.split('.').length-1 === 1){
