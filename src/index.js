@@ -8,6 +8,7 @@ const buttonsValues = ['c', '-', 'b', '1', '2', '3', '/', '4', '5', '6', '*', '7
 const operators = ['-', '\u00F7', 'x', '+'];
 const doubleWidthButton = ['=', 'b'];
 
+
 const Buttons = props => (
   <div className="most-numbers-container">
     <div>
@@ -35,8 +36,34 @@ const Display = props => (
 
 
 function Calculator() {
+  function handleTypedInput(event){
+    var keyPressed = event.key
+    switch(keyPressed) {
+      case 'Enter':
+        keyPressed = '=';
+        break;
+      case 'c': case 'Delete':
+        keyPressed = 'Clear';
+        break;
+      case 'Backspace':
+        keyPressed = 'Back';
+        break;
+      case '*':
+        keyPressed = 'x';
+        break;
+      case '/':
+        keyPressed = '÷';
+        break;
+    }
+    if(buttonsToRender.includes(keyPressed)) {
+      handleInput(keyPressed);
+    }
+  }
+
   useEffect(() => {
     document.title = 'Reactful Calculator';
+    document.addEventListener("keydown", handleTypedInput);
+    return () => document.removeEventListener("keydown", handleTypedInput);
   });
   const [calcDisplay, setCalcDisplay] = useState('0');
 
@@ -53,7 +80,7 @@ function Calculator() {
 
   function calculateAnswer() {
     try {
-      return eval(getCalcValsFromDisplay()).toString();
+      return eval(getCalcValsFromInput(calcDisplay)).toString();
     } catch (e) {
       return 'e';
     }
@@ -63,9 +90,9 @@ function Calculator() {
     calcDisplay !== '0' ? setCalcDisplay(calcDisplay + inputToDisplay) : setCalcDisplay(inputToDisplay);
   }
 
-  function getCalcValsFromDisplay() {
+  function getCalcValsFromInput(input) {
     var calcVals = '';
-    calcDisplay.split('').forEach(displayElem => {
+    input.split('').forEach(displayElem => {
       var indexOfElem = buttonsToRender.indexOf(displayElem);
       calcVals += buttonsValues[indexOfElem];
     });
