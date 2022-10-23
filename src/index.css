@@ -9,16 +9,15 @@ body {
 }
 
 .display {
-    height: 100px;
-    background-color: grey;
     font-size: 44px;
-    display: flex;
-    justify-content: right;
-    align-items: center;
     font-weight: 700;
-    padding: 12px 24px;
     word-break: break-word;
+    text-align: right;
+    padding: 12px 24px;
+    width: 100%;
+    background-color: grey;
     height: fit-content;
+    box-sizing: border-box;
 }
 
 .button {

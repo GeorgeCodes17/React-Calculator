@@ -46,7 +46,7 @@ function Calculator() {
       case 'Backspace':
         keyPressed = 'Back';
         break;
-      case '*':
+      case '*': case 'X':
         keyPressed = 'x';
         break;
       case '/':
