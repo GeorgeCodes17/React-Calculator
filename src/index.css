@@ -7,9 +7,6 @@ body {
     margin: 0 auto;
     max-width: 800px
 }
-.most-numbers-container {
-    display: grid;
-}
 
 .display {
     height: 100px;
@@ -24,14 +21,18 @@ body {
     height: fit-content;
 }
 
-.number-buttons-container {
-    display: inline-grid;
-}
-.number-button {
-    width: 200px;
+.button {
+    width: 25%;
     height: 100px;
     background-color: #61ba99;
-}
-.button {
     font-size: 24px;
 }
+
+@media only screen and (max-width: 576px) {
+    .display {
+        font-size: 40px;
+    }
+    .button {
+      font-size: 20px;
+    }
+  }

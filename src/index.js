@@ -10,14 +10,13 @@ const doubleWidthButton = ['=', 'b'];
 
 
 const Buttons = props => (
-  <div className="most-numbers-container">
     <div>
     {
       [...Array(buttonsToRender.length)].map((e, index) =>
         <button
-          className="number-button button"
+          className="button"
           key={buttonsValues[index]}
-          style={ doubleWidthButton.includes(buttonsValues[index]) ? { width:'400px' } : {}}
+          style={ doubleWidthButton.includes(buttonsValues[index]) ? { width:'50%' } : {}}
           onClick={()=>props.handleInput(buttonsToRender[index])}
         >
           {buttonsToRender[index]}
@@ -25,7 +24,6 @@ const Buttons = props => (
       )
     }
     </div>
-  </div>
 )
 
 const Display = props => (
