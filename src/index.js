@@ -30,7 +30,7 @@ const Display = props => (
     <div className="display">
       {props.displayText}
     </div>
-    <p className="shortcuts-message"><i>You can use a physical keyboard. E.g. "c" or "Delete" = 'Clear'</i></p>
+    <p className="shortcuts-message"><i>Ygou can use a physical keyboard. E.g. "c" or "Delete" = 'Clear'</i></p>
   </div>
 )
 
