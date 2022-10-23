@@ -5,11 +5,14 @@ body {
 .container {
     width: 90%;
     margin: 0 auto;
-    max-width: 800px
+    max-width: 800px;
+    background: url('/src/karl.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
 }
 
 .display-container {
-    background-color: grey;
+    background-color: transparent;
     padding: 12px 24px;
 }
 
@@ -33,7 +36,7 @@ body {
 .button {
     width: 25%;
     height: 100px;
-    background-color: #61ba99;
+    background-color: transparent;
     font-size: 24px;
 }
 
