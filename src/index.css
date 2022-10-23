@@ -8,16 +8,26 @@ body {
     max-width: 800px
 }
 
+.display-container {
+    background-color: grey;
+    padding: 12px 24px;
+}
+
 .display {
     font-size: 44px;
     font-weight: 700;
     word-break: break-word;
     text-align: right;
-    padding: 12px 24px;
     width: 100%;
-    background-color: grey;
     height: fit-content;
     box-sizing: border-box;
+    margin-bottom: 12px;
+}
+
+.shortcuts-message {
+    text-align: center;
+    margin: 0;
+    font-size: 12px;
 }
 
 .button {
@@ -32,6 +42,9 @@ body {
         font-size: 40px;
     }
     .button {
-      font-size: 20px;
+        font-size: 20px;
     }
-  }
+    .shortcuts-message {
+        display: none;
+    }
+}

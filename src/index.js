@@ -27,8 +27,11 @@ const Buttons = props => (
 )
 
 const Display = props => (
-  <div className="display">
-    {props.displayText}
+  <div className='display-container'>
+    <div className="display">
+      {props.displayText}
+    </div>
+    <p className="shortcuts-message"><i>You can use a physical keyboard. E.g. "c" or "Delete" = 'Clear'</i></p>
   </div>
 )
 
