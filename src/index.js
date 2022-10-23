@@ -30,7 +30,7 @@ const Buttons = props => (
 
 const Display = props => (
   <div className="display-container">
-    <p id="calculator-display" className="display">{props.displayText}</p>
+    <span className="display">{props.displayText}</span>
   </div>
 )
 

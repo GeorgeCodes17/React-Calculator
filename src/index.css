@@ -3,7 +3,7 @@ body {
 }
 
 .container {
-    width: 90%;
+    width: 95%;
     margin: 0 auto;
     max-width: 800px
 }
@@ -12,16 +12,20 @@ body {
 }
 
 .display-container {
-    height: 100px;
+    height: fit-content;
     background-color: grey;
     font-size: 44px;
     display: flex;
     justify-content: right;
     align-items: center;
+    padding: 20px 24px;
 }
 .display {
-    margin: 0 24px;
-    font-weight: 700
+    font-weight: 700;
+    display: inline-block;
+    width: 100%;
+    word-wrap: break-word;
+    direction: rtl
 }
 
 .number-buttons-container {
