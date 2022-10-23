@@ -1,4 +1,3 @@
-import { render } from '@testing-library/react';
 import React, { useEffect, useState} from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
