@@ -11,17 +11,17 @@ body {
     display: grid;
 }
 
-.display-container {
+.display {
     height: 100px;
     background-color: grey;
     font-size: 44px;
     display: flex;
     justify-content: right;
     align-items: center;
-}
-.display {
-    margin: 0 24px;
-    font-weight: 700
+    font-weight: 700;
+    padding: 12px 24px;
+    word-break: break-word;
+    height: fit-content;
 }
 
 .number-buttons-container {

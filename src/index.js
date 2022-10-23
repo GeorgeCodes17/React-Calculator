@@ -29,8 +29,8 @@ const Buttons = props => (
 )
 
 const Display = props => (
-  <div className="display-container">
-    <p id="calculator-display" className="display">{props.displayText}</p>
+  <div className="display">
+    {props.displayText}
   </div>
 )
 
