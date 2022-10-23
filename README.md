@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Getting Started with the Calculator App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project shows a simple calculator created with React.
+You can add, subtract, times or divide; use decimal points; clear the calculator or backspace, and type onto the calculator anywhere on desktop using a keyboard.
+It's optimised for mobile too.
 
 ## Available Scripts
 
