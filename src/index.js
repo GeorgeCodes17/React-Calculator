@@ -129,10 +129,14 @@ function Calculator() {
   }
 
   return (
-    <div className="container">
-      <Display displayText={calcDisplay}/>
+    <div>
+      <h1 className="title">Karlculator</h1>
       
-      <Buttons numOfButtons={buttonsToRender} handleInput={handleInput} />
+      <div className="container">
+        <Display displayText={calcDisplay}/>
+        
+        <Buttons numOfButtons={buttonsToRender} handleInput={handleInput} />
+      </div>
     </div>
   );
 }

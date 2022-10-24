@@ -2,6 +2,12 @@ body {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
+.title {
+    text-align: center;
+    margin: 20px 0;
+    font-size: 44px;
+}
+
 .container {
     width: 90%;
     margin: 0 auto;
